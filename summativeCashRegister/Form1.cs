@@ -21,6 +21,12 @@ namespace summativeCashRegister
         int drank;
         int frie;
         double sub;
+        double subTax;
+        double tot;
+        double bill;
+        double balance;
+        int orderNum = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -33,7 +39,27 @@ namespace summativeCashRegister
             frie = Convert.ToInt16(friesNum.Text);
 
             sub = burger * BURGERCOST + frie * FRIESCOST + drank * DRANKCOST;
-            subTotalNum.Text = sub.ToStri
+            subTotalNum.Text = sub.ToString("$0.00");
+
+            subTax = sub * HST;
+            taxNum.Text = subTax.ToString("$0.00");
+
+            tot = subTax + sub;
+            totalNum.Text = tot.ToString("$0.00");
+        }
+
+        private void calcChange_Click(object sender, EventArgs e)
+        {
+            bill = Convert.ToDouble(moneyGiven.Text);
+            balance = bill - tot;
+            changeNum.Text = balance.ToString("$0.00");
+            
+        }
+
+        private void printReciept_Click(object sender, EventArgs e)
+        {
+            orderNum++;
+            output.Text = "Mr.Burger's Burger Shack of Beef Burgers \n Order Number " + orderNum +
         }
     }
 }

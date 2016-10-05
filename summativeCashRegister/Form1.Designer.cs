@@ -44,9 +44,9 @@
             this.drinkNum = new System.Windows.Forms.TextBox();
             this.moneyGiven = new System.Windows.Forms.TextBox();
             this.subTotalNum = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.taxNum = new System.Windows.Forms.Label();
+            this.totalNum = new System.Windows.Forms.Label();
+            this.changeNum = new System.Windows.Forms.Label();
             this.newWorldOrder = new System.Windows.Forms.Button();
             this.output = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -141,15 +141,17 @@
             this.calcChange.TabIndex = 9;
             this.calcChange.Text = "Calculate Change";
             this.calcChange.UseVisualStyleBackColor = true;
+            this.calcChange.Click += new System.EventHandler(this.calcChange_Click);
             // 
             // printReciept
             // 
             this.printReciept.Location = new System.Drawing.Point(12, 412);
             this.printReciept.Name = "printReciept";
-            this.printReciept.Size = new System.Drawing.Size(159, 29);
+            this.printReciept.Size = new System.Drawing.Size(270, 29);
             this.printReciept.TabIndex = 10;
             this.printReciept.Text = "Print Reciept";
             this.printReciept.UseVisualStyleBackColor = true;
+            this.printReciept.Click += new System.EventHandler(this.printReciept_Click);
             // 
             // burgerNum
             // 
@@ -188,38 +190,38 @@
             this.subTotalNum.TabIndex = 15;
             this.subTotalNum.Text = "label1";
             // 
-            // label2
+            // taxNum
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(116, 215);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "label2";
+            this.taxNum.AutoSize = true;
+            this.taxNum.Location = new System.Drawing.Point(116, 215);
+            this.taxNum.Name = "taxNum";
+            this.taxNum.Size = new System.Drawing.Size(35, 13);
+            this.taxNum.TabIndex = 16;
+            this.taxNum.Text = "label2";
             // 
-            // label3
+            // totalNum
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(116, 239);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 17;
-            this.label3.Text = "label3";
+            this.totalNum.AutoSize = true;
+            this.totalNum.Location = new System.Drawing.Point(116, 239);
+            this.totalNum.Name = "totalNum";
+            this.totalNum.Size = new System.Drawing.Size(35, 13);
+            this.totalNum.TabIndex = 17;
+            this.totalNum.Text = "label3";
             // 
-            // label4
+            // changeNum
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(116, 360);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 18;
-            this.label4.Text = "label4";
+            this.changeNum.AutoSize = true;
+            this.changeNum.Location = new System.Drawing.Point(116, 360);
+            this.changeNum.Name = "changeNum";
+            this.changeNum.Size = new System.Drawing.Size(35, 13);
+            this.changeNum.TabIndex = 18;
+            this.changeNum.Text = "label4";
             // 
             // newWorldOrder
             // 
-            this.newWorldOrder.Location = new System.Drawing.Point(327, 412);
+            this.newWorldOrder.Location = new System.Drawing.Point(288, 412);
             this.newWorldOrder.Name = "newWorldOrder";
-            this.newWorldOrder.Size = new System.Drawing.Size(191, 29);
+            this.newWorldOrder.Size = new System.Drawing.Size(284, 29);
             this.newWorldOrder.TabIndex = 19;
             this.newWorldOrder.Text = "New Order";
             this.newWorldOrder.UseVisualStyleBackColor = true;
@@ -227,11 +229,11 @@
             // output
             // 
             this.output.AutoSize = true;
-            this.output.Location = new System.Drawing.Point(285, 31);
+            this.output.Location = new System.Drawing.Point(285, 38);
             this.output.Name = "output";
-            this.output.Size = new System.Drawing.Size(35, 13);
+            this.output.Size = new System.Drawing.Size(44, 13);
             this.output.TabIndex = 20;
-            this.output.Text = "label5";
+            this.output.Text = "Reciept";
             // 
             // Form1
             // 
@@ -240,9 +242,9 @@
             this.ClientSize = new System.Drawing.Size(584, 461);
             this.Controls.Add(this.output);
             this.Controls.Add(this.newWorldOrder);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.changeNum);
+            this.Controls.Add(this.totalNum);
+            this.Controls.Add(this.taxNum);
             this.Controls.Add(this.subTotalNum);
             this.Controls.Add(this.moneyGiven);
             this.Controls.Add(this.drinkNum);
@@ -284,9 +286,9 @@
         private System.Windows.Forms.TextBox drinkNum;
         private System.Windows.Forms.TextBox moneyGiven;
         private System.Windows.Forms.Label subTotalNum;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label taxNum;
+        private System.Windows.Forms.Label totalNum;
+        private System.Windows.Forms.Label changeNum;
         private System.Windows.Forms.Button newWorldOrder;
         private System.Windows.Forms.Label output;
     }
