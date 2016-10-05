@@ -59,7 +59,7 @@ namespace summativeCashRegister
         private void printReciept_Click(object sender, EventArgs e)
         {
             orderNum++;
-            output.Text = "Mr.Burger's Burger Shack of Beef Burgers \n Order Number " + orderNum +
+            output.Text = "Mr.Burger's Burger Shack of Beef Burgers \n Order Number " + orderNum + "\n date" + "\nHamburgers x" + burger + " = ";
         }
     }
 }
