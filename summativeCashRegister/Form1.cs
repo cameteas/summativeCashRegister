@@ -20,46 +20,83 @@ namespace summativeCashRegister
         int burger;
         int drank;
         int frie;
+        int stageValue = 0;
+        int orderNum = 0;
         double sub;
         double subTax;
         double tot;
         double bill;
         double balance;
-        int orderNum = 0;
+        double ordBurgPrice;
+        double ordFriePrice;
+        double ordDrankPrice;
+        Font receiptFont = new Font("Consolas", 9);
+        SolidBrush receiptBrush = new SolidBrush(Color.Red);
 
         public Form1()
         {
             InitializeComponent();
         }
 
+        //stage 1 calculating/printing totals
         private void calcTotals_Click(object sender, EventArgs e)
         {
-            burger = Convert.ToInt16(burgerNum.Text);
-            drank = Convert.ToInt16(drinkNum.Text);
-            frie = Convert.ToInt16(friesNum.Text);
+            try
+            {
+                
+                burger = Convert.ToInt16(burgerNum.Text);
+                drank = Convert.ToInt16(drinkNum.Text);
+                frie = Convert.ToInt16(friesNum.Text);
 
-            sub = burger * BURGERCOST + frie * FRIESCOST + drank * DRANKCOST;
-            subTotalNum.Text = sub.ToString("$0.00");
+                ordBurgPrice = burger * BURGERCOST;
+                ordFriePrice = frie * FRIESCOST;
+                ordDrankPrice = drank * DRANKCOST;
 
-            subTax = sub * HST;
-            taxNum.Text = subTax.ToString("$0.00");
+                sub = burger * BURGERCOST + frie * FRIESCOST + drank * DRANKCOST;
+                subTotalNum.Text = sub.ToString("$0.00");
 
-            tot = subTax + sub;
-            totalNum.Text = tot.ToString("$0.00");
+                subTax = sub * HST;
+                taxNum.Text = subTax.ToString("$0.00");
+
+                tot = subTax + sub;
+                totalNum.Text = tot.ToString("$0.00");
+            }
+            catch
+            {
+                notNum.Text = "Make Sure your menu items are \n Numbers";
+            }
         }
 
+        //calculate change
         private void calcChange_Click(object sender, EventArgs e)
         {
-            bill = Convert.ToDouble(moneyGiven.Text);
-            balance = bill - tot;
-            changeNum.Text = balance.ToString("$0.00");
-            
+            try
+            {
+                bill = Convert.ToDouble(moneyGiven.Text);
+                balance = bill - tot;
+                changeNum.Text = balance.ToString("$0.00");
+            }
+            catch
+            {
+                changeNum.Text = "that's not a valid change amount";
+            }
         }
-
+        //stage 3 print receipt
         private void printReciept_Click(object sender, EventArgs e)
         {
+            Graphics reciept = this.CreateGraphics();
             orderNum++;
-            output.Text = "Mr.Burger's Burger Shack of Beef Burgers \n Order Number " + orderNum + "\n date" + "\nHamburgers x" + burger + " = ";
+            reciept.DrawString("Mr.Burger's Burger Shack of Beef Burgers \n Order Number " +
+                orderNum +
+                "\n date" +
+                "\nHamburgers   x" + burger + "  =   " + ordBurgPrice.ToString("$0.00") +
+                "\nFries        x" + frie + "  =   " + ordFriePrice.ToString("$0.00") +
+                "\nDranks       x" + drank + "  =   " + ordDrankPrice.ToString("$0.00") +
+                "\nSubtotal         =   " + sub.ToString("$0.00") +
+                "\nHST              =   " + subTax.ToString("$0.00") +
+                "\nTotal            =   " + tot.ToString("$0.00") +
+                "\nTenedered        =   " + bill.ToString("$0.00") +
+                "\nReturned         =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20) ;
         }
     }
 }

@@ -48,7 +48,7 @@
             this.totalNum = new System.Windows.Forms.Label();
             this.changeNum = new System.Windows.Forms.Label();
             this.newWorldOrder = new System.Windows.Forms.Button();
-            this.output = new System.Windows.Forms.Label();
+            this.notNum = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // burgers
@@ -159,6 +159,7 @@
             this.burgerNum.Name = "burgerNum";
             this.burgerNum.Size = new System.Drawing.Size(100, 20);
             this.burgerNum.TabIndex = 11;
+            this.burgerNum.Text = "0";
             // 
             // friesNum
             // 
@@ -166,6 +167,7 @@
             this.friesNum.Name = "friesNum";
             this.friesNum.Size = new System.Drawing.Size(100, 20);
             this.friesNum.TabIndex = 12;
+            this.friesNum.Text = "0";
             // 
             // drinkNum
             // 
@@ -173,6 +175,7 @@
             this.drinkNum.Name = "drinkNum";
             this.drinkNum.Size = new System.Drawing.Size(100, 20);
             this.drinkNum.TabIndex = 13;
+            this.drinkNum.Text = "0";
             // 
             // moneyGiven
             // 
@@ -180,42 +183,39 @@
             this.moneyGiven.Name = "moneyGiven";
             this.moneyGiven.Size = new System.Drawing.Size(100, 20);
             this.moneyGiven.TabIndex = 14;
+            this.moneyGiven.Text = "0";
             // 
             // subTotalNum
             // 
             this.subTotalNum.AutoSize = true;
             this.subTotalNum.Location = new System.Drawing.Point(116, 191);
             this.subTotalNum.Name = "subTotalNum";
-            this.subTotalNum.Size = new System.Drawing.Size(35, 13);
+            this.subTotalNum.Size = new System.Drawing.Size(0, 13);
             this.subTotalNum.TabIndex = 15;
-            this.subTotalNum.Text = "label1";
             // 
             // taxNum
             // 
             this.taxNum.AutoSize = true;
             this.taxNum.Location = new System.Drawing.Point(116, 215);
             this.taxNum.Name = "taxNum";
-            this.taxNum.Size = new System.Drawing.Size(35, 13);
+            this.taxNum.Size = new System.Drawing.Size(0, 13);
             this.taxNum.TabIndex = 16;
-            this.taxNum.Text = "label2";
             // 
             // totalNum
             // 
             this.totalNum.AutoSize = true;
             this.totalNum.Location = new System.Drawing.Point(116, 239);
             this.totalNum.Name = "totalNum";
-            this.totalNum.Size = new System.Drawing.Size(35, 13);
+            this.totalNum.Size = new System.Drawing.Size(0, 13);
             this.totalNum.TabIndex = 17;
-            this.totalNum.Text = "label3";
             // 
             // changeNum
             // 
             this.changeNum.AutoSize = true;
             this.changeNum.Location = new System.Drawing.Point(116, 360);
             this.changeNum.Name = "changeNum";
-            this.changeNum.Size = new System.Drawing.Size(35, 13);
+            this.changeNum.Size = new System.Drawing.Size(0, 13);
             this.changeNum.TabIndex = 18;
-            this.changeNum.Text = "label4";
             // 
             // newWorldOrder
             // 
@@ -226,21 +226,20 @@
             this.newWorldOrder.Text = "New Order";
             this.newWorldOrder.UseVisualStyleBackColor = true;
             // 
-            // output
+            // notNum
             // 
-            this.output.AutoSize = true;
-            this.output.Location = new System.Drawing.Point(285, 38);
-            this.output.Name = "output";
-            this.output.Size = new System.Drawing.Size(44, 13);
-            this.output.TabIndex = 20;
-            this.output.Text = "Reciept";
+            this.notNum.AutoSize = true;
+            this.notNum.Location = new System.Drawing.Point(157, 141);
+            this.notNum.Name = "notNum";
+            this.notNum.Size = new System.Drawing.Size(0, 13);
+            this.notNum.TabIndex = 21;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 461);
-            this.Controls.Add(this.output);
+            this.Controls.Add(this.notNum);
             this.Controls.Add(this.newWorldOrder);
             this.Controls.Add(this.changeNum);
             this.Controls.Add(this.totalNum);
@@ -290,7 +289,7 @@
         private System.Windows.Forms.Label totalNum;
         private System.Windows.Forms.Label changeNum;
         private System.Windows.Forms.Button newWorldOrder;
-        private System.Windows.Forms.Label output;
+        private System.Windows.Forms.Label notNum;
     }
 }
 
