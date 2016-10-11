@@ -125,32 +125,35 @@
             // 
             // calcTotals
             // 
+            this.calcTotals.BackColor = System.Drawing.Color.Gainsboro;
             this.calcTotals.Location = new System.Drawing.Point(12, 133);
             this.calcTotals.Name = "calcTotals";
             this.calcTotals.Size = new System.Drawing.Size(139, 28);
             this.calcTotals.TabIndex = 8;
             this.calcTotals.Text = "Calculate Totals";
-            this.calcTotals.UseVisualStyleBackColor = true;
+            this.calcTotals.UseVisualStyleBackColor = false;
             this.calcTotals.Click += new System.EventHandler(this.calcTotals_Click);
             // 
             // calcChange
             // 
+            this.calcChange.BackColor = System.Drawing.Color.Gainsboro;
             this.calcChange.Location = new System.Drawing.Point(12, 320);
             this.calcChange.Name = "calcChange";
             this.calcChange.Size = new System.Drawing.Size(139, 29);
             this.calcChange.TabIndex = 9;
             this.calcChange.Text = "Calculate Change";
-            this.calcChange.UseVisualStyleBackColor = true;
+            this.calcChange.UseVisualStyleBackColor = false;
             this.calcChange.Click += new System.EventHandler(this.calcChange_Click);
             // 
             // printReciept
             // 
+            this.printReciept.BackColor = System.Drawing.Color.Gainsboro;
             this.printReciept.Location = new System.Drawing.Point(12, 412);
             this.printReciept.Name = "printReciept";
             this.printReciept.Size = new System.Drawing.Size(270, 29);
             this.printReciept.TabIndex = 10;
             this.printReciept.Text = "Print Reciept";
-            this.printReciept.UseVisualStyleBackColor = true;
+            this.printReciept.UseVisualStyleBackColor = false;
             this.printReciept.Click += new System.EventHandler(this.printReciept_Click);
             // 
             // burgerNum

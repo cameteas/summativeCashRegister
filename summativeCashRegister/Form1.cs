@@ -44,6 +44,7 @@ namespace summativeCashRegister
             if (stageValue == 1)
             {
                 calcTotals.BackColor = Color.WhiteSmoke;
+                calcTotals.ForeColor = Color.LightGray;
                 burgers.ForeColor = Color.LightGray;
                 drinks.ForeColor = Color.LightGray;
                 fries.ForeColor = Color.LightGray;
@@ -53,7 +54,8 @@ namespace summativeCashRegister
                 burgerNum.ForeColor = Color.LightGray;
                 friesNum.ForeColor = Color.LightGray;
                 drinkNum.ForeColor = Color.LightGray;
-                calcTotals.ForeColor = Color.LightGray;
+                printReciept.ForeColor = Color.LightGray;
+                printReciept.BackColor = Color.WhiteSmoke;
 
                 try
                 {
@@ -88,8 +90,7 @@ namespace summativeCashRegister
         //stage 2 calculate change
         private void calcChange_Click(object sender, EventArgs e)
         {
-            if(bill <= tot)
-            {
+            
                 if (stageValue == 2)
                 {
                     calcChange.BackColor = Color.WhiteSmoke;
@@ -103,6 +104,8 @@ namespace summativeCashRegister
                     moneyGiven.BackColor = Color.WhiteSmoke;
                     moneyGiven.ForeColor = Color.LightGray;
                     tendered.ForeColor = Color.LightGray;
+                    printReciept.BackColor = Color.Gainsboro;
+                    printReciept.ForeColor = Color.Black;
 
                     try
                     {
@@ -116,6 +119,10 @@ namespace summativeCashRegister
                         changeNum.Text = "that's not a valid change amount";
                     }
                 }
+
+            if (bill >= tot)
+            {
+                stageValue++;
             }
             else
             {
@@ -131,6 +138,8 @@ namespace summativeCashRegister
                 changeNum.ForeColor = Color.LightGray;
                 printReciept.ForeColor = Color.LightGray;
                 printReciept.BackColor = Color.WhiteSmoke;
+                printReciept.BackColor = Color.WhiteSmoke;
+                printReciept.ForeColor = Color.LightGray;
                 Graphics reciept = this.CreateGraphics();
                 orderNum++;
                 reciept.DrawString("    Mr.Burger's Burger Shack \n         of Beef Burgers" +
@@ -151,6 +160,42 @@ namespace summativeCashRegister
         private void newWorldOrder_Click(object sender, EventArgs e)
         {
             stageValue = 1;
+            calcTotals.BackColor = Color.Gainsboro;
+            burgers.ForeColor = Color.Black;
+            drinks.ForeColor = Color.Black;
+            fries.ForeColor = Color.Black;
+            burgerNum.BackColor = Color.White;
+            drinkNum.BackColor = Color.White;
+            friesNum.BackColor = Color.White;
+            burgerNum.ForeColor = Color.Black;
+            friesNum.ForeColor = Color.Black;
+            drinkNum.ForeColor = Color.Black;
+            calcTotals.ForeColor = Color.Black;
+
+            calcChange.BackColor = Color.Gainsboro;
+            calcChange.ForeColor = Color.Black;
+            subTotal.ForeColor = Color.Black;
+            subTotalNum.ForeColor = Color.Black;
+            tax.ForeColor = Color.Black;
+            taxNum.ForeColor = Color.Black;
+            total.ForeColor = Color.Black;
+            totalNum.ForeColor = Color.Black;
+            moneyGiven.BackColor = Color.White;
+            moneyGiven.ForeColor = Color.Black;
+            tendered.ForeColor = Color.Black;
+
+            change.ForeColor = Color.Black;
+            changeNum.ForeColor = Color.Black;
+            printReciept.ForeColor = Color.LightGray;
+            printReciept.BackColor = Color.WhiteSmoke;
+            drinkNum.Text = "0";
+            burgerNum.Text = "0";
+            friesNum.Text = "0";
+            moneyGiven.Text = "0";
+            subTotalNum.Text = "";
+            taxNum.Text = "";
+            totalNum.Text = "";
+            changeNum.Text = "";
         }
     }
 }
