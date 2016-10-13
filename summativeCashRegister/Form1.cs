@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -22,6 +23,7 @@ namespace summativeCashRegister
         int frie;
         int stageValue = 1;
         int orderNum = 0;
+        int drawHeight = 20;
         double sub;
         double subTax;
         double tot;
@@ -36,6 +38,9 @@ namespace summativeCashRegister
         public Form1()
         {
             InitializeComponent();
+            printReciept.BackColor = Color.WhiteSmoke;
+            printReciept.ForeColor = Color.LightGray;
+
         }
 
         //stage 1 calculating/printing totals
@@ -77,10 +82,24 @@ namespace summativeCashRegister
                     tot = subTax + sub;
                     totalNum.Text = tot.ToString("$0.00");
                     stageValue++;
+                    notNum.Text = "";
                 }
                 catch
                 {
                     notNum.Text = "Make Sure your menu items are \n Numbers";
+                    calcTotals.BackColor = Color.Gainsboro;
+                    calcTotals.ForeColor = Color.Black;
+                    burgers.ForeColor = Color.Black;
+                    drinks.ForeColor = Color.Black;
+                    fries.ForeColor = Color.Black;
+                    burgerNum.BackColor = Color.White;
+                    drinkNum.BackColor = Color.White;
+                    friesNum.BackColor = Color.White;
+                    burgerNum.ForeColor = Color.Black;
+                    friesNum.ForeColor = Color.Black;
+                    drinkNum.ForeColor = Color.Black;
+                    printReciept.ForeColor = Color.Black;
+                    printReciept.BackColor = Color.Gainsboro;
                 }
                 Refresh();
                 
@@ -112,7 +131,7 @@ namespace summativeCashRegister
                         bill = Convert.ToDouble(moneyGiven.Text);
                         balance = bill - tot;
                         changeNum.Text = balance.ToString("$0.00");
-                        stageValue++;
+                        
                     }
                     catch
                     {
@@ -127,6 +146,20 @@ namespace summativeCashRegister
             else
             {
                 changeNum.Text = "that Simply is not enough money";
+                calcChange.BackColor = Color.Gainsboro;
+                calcChange.ForeColor = Color.Black;
+                subTotal.ForeColor = Color.Black;
+                subTotalNum.ForeColor = Color.Black;
+                tax.ForeColor = Color.Black;
+                taxNum.ForeColor = Color.Black;
+                total.ForeColor = Color.Black;
+                totalNum.ForeColor = Color.Black;
+                tendered.ForeColor = Color.Black;
+                moneyGiven.BackColor = Color.White;
+                moneyGiven.ForeColor = Color.Black;
+                tendered.ForeColor = Color.White;
+                printReciept.BackColor = Color.WhiteSmoke;
+                printReciept.ForeColor = Color.LightGray;
             }
         }
         //stage 3 print receipt
@@ -142,7 +175,54 @@ namespace summativeCashRegister
                 printReciept.ForeColor = Color.LightGray;
                 Graphics reciept = this.CreateGraphics();
                 orderNum++;
-                reciept.DrawString("    Mr.Burger's Burger Shack \n         of Beef Burgers" +
+                string[] words = new string[] {
+                    //1
+                    "    Mr.Burger's Burger Shack",
+                    "         of Beef Burgers",
+                    "         Order Number " ,
+                    orderNum.ToString(),
+
+                    //5
+                    "       Date October 23 2001",
+                    "Hamburgers   x",
+                    burger.ToString(),
+                    "   @2.49     =   " ,
+                    ordBurgPrice.ToString("$0.00"),
+
+                    //10
+                    "Fries        x",
+                    frie.ToString(),
+                    "   @1.89     =   " ,
+                    ordFriePrice.ToString("$0.00"),
+                    "Dranks       x",
+
+                    //15
+                    drank.ToString() ,
+                    "   @0.99     =   " ,
+                    ordDrankPrice.ToString("$0.00"),
+                    "Subtotal                    =   " ,
+                    sub.ToString("$0.00") ,
+
+                    //20
+                    "HST                         =   " ,
+                    subTax.ToString("$0.00") ,
+                    "Total                       =   " ,
+                    tot.ToString("$0.00") ,
+                    "Tenedered                   =   " ,
+
+                    //25
+                    bill.ToString("$0.00") ,
+                    "Returned                    =   " ,
+                    balance.ToString("$0.00")
+                };
+                for( int i = 0; i < words.Length; i++)
+                {
+                    reciept.DrawString(words[i], receiptFont, receiptBrush, 250, drawHeight);
+                    if (i == 4||i == 7 || i == 8 || i == 9 || i == 11 || i == 12 || i == 13 || i == 15 || i == 16 || i == 17 || i == 20 || i == 22 || i == 4 ||)
+                    drawHeight = drawHeight + 20;
+                    Thread.Sleep(100);
+                }
+                /*reciept.DrawString("    Mr.Burger's Burger Shack \n         of Beef Burgers" + 
                     "\n\n         Order Number " + orderNum +
                     "\n       Date October 23 2001" +
                     "\n\nHamburgers   x" + burger + "   @2.49     =   " + ordBurgPrice.ToString("$0.00") +
@@ -152,7 +232,7 @@ namespace summativeCashRegister
                     "\nHST                         =   " + subTax.ToString("$0.00") +
                     "\nTotal                       =   " + tot.ToString("$0.00") +
                     "\n\nTenedered                   =   " + bill.ToString("$0.00") +
-                    "\nReturned                    =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20);
+                    "\nReturned                    =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20);*/
                 stageValue++;
             }
         }
