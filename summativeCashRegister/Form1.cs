@@ -24,6 +24,7 @@ namespace summativeCashRegister
         int stageValue = 1;
         int orderNum = 0;
         int drawHeight = 20;
+        int drawWidth = 250;
         double sub;
         double subTax;
         double tot;
@@ -184,43 +185,59 @@ namespace summativeCashRegister
 
                     //5
                     "       Date October 23 2001",
-                    "Hamburgers   x",
+                    "Hamburgers x",
                     burger.ToString(),
-                    "   @2.49     =   " ,
+                    "   @2.49   =   " ,
                     ordBurgPrice.ToString("$0.00"),
 
                     //10
-                    "Fries        x",
+                    "Fries      x",
                     frie.ToString(),
-                    "   @1.89     =   " ,
+                    "   @1.89   =   " ,
                     ordFriePrice.ToString("$0.00"),
-                    "Dranks       x",
+                    "Dranks     x",
 
                     //15
                     drank.ToString() ,
-                    "   @0.99     =   " ,
+                    "   @0.99   =   " ,
                     ordDrankPrice.ToString("$0.00"),
-                    "Subtotal                    =   " ,
+                    "Subtotal   =   " ,
                     sub.ToString("$0.00") ,
 
                     //20
-                    "HST                         =   " ,
+                    "HST        =   " ,
                     subTax.ToString("$0.00") ,
-                    "Total                       =   " ,
+                    "Total      =   " ,
                     tot.ToString("$0.00") ,
-                    "Tenedered                   =   " ,
+                    "Tenedered  =   " ,
 
                     //25
                     bill.ToString("$0.00") ,
-                    "Returned                    =   " ,
+                    "Returned   =   " ,
                     balance.ToString("$0.00")
                 };
                 for( int i = 0; i < words.Length; i++)
                 {
-                    reciept.DrawString(words[i], receiptFont, receiptBrush, 250, drawHeight);
-                    if (i == 4||i == 7 || i == 8 || i == 9 || i == 11 || i == 12 || i == 13 || i == 15 || i == 16 || i == 17 || i == 20 || i == 22 || i == 4 ||)
-                    drawHeight = drawHeight + 20;
-                    Thread.Sleep(100);
+                    
+                    if (i == 3||i == 6 ||i == 10 ||i == 14|| i == 18 || i == 20 || i == 22 || i == 24 || i == 26)
+                    {
+                        drawWidth = drawWidth + 125;
+                    }
+                    else if (i == 7||i == 11 ||i == 15)
+                    {
+                        drawWidth = drawWidth + 25;
+                    }
+                    else if (i == 8 || i == 12 ||i == 16)
+                    {
+                        drawWidth = drawWidth + 120;
+                    }
+                    else
+                    {
+                        drawHeight = drawHeight + 20;
+                        drawWidth = 250;
+                    }
+                    reciept.DrawString(words[i], receiptFont, receiptBrush, drawWidth, drawHeight);
+                    Thread.Sleep(50);
                 }
                 /*reciept.DrawString("    Mr.Burger's Burger Shack \n         of Beef Burgers" + 
                     "\n\n         Order Number " + orderNum +
@@ -228,11 +245,11 @@ namespace summativeCashRegister
                     "\n\nHamburgers   x" + burger + "   @2.49     =   " + ordBurgPrice.ToString("$0.00") +
                     "\nFries        x" + frie + "   @1.89     =   " + ordFriePrice.ToString("$0.00") +
                     "\nDranks       x" + drank + "   @0.99     =   " + ordDrankPrice.ToString("$0.00") +
-                    "\n\nSubtotal                    =   " + sub.ToString("$0.00") +
-                    "\nHST                         =   " + subTax.ToString("$0.00") +
-                    "\nTotal                       =   " + tot.ToString("$0.00") +
-                    "\n\nTenedered                   =   " + bill.ToString("$0.00") +
-                    "\nReturned                    =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20);*/
+                    "\n\nSubtotal   =   " + sub.ToString("$0.00") +
+                    "\nHST          =   " + subTax.ToString("$0.00") +
+                    "\nTotal        =   " + tot.ToString("$0.00") +
+                    "\n\nTenedered  =   " + bill.ToString("$0.00") +
+                    "\nReturned     =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20);*/
                 stageValue++;
             }
         }
