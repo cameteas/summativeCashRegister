@@ -8,16 +8,14 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace summativeCashRegister
 {
     public partial class Form1 : Form
     {
         //declaring variables
-        const double BURGERCOST = 2.49;
-        const double FRIESCOST = 1.89;
-        const double DRANKCOST = 0.99;
-        const double HST = 0.13;
+
         int burger;
         int drank;
         int frie;
@@ -25,6 +23,12 @@ namespace summativeCashRegister
         int orderNum = 0;
         int drawHeight = 20;
         int drawWidth = 250;
+
+        const double BURGERCOST = 2.49;
+        const double FRIESCOST = 1.89;
+        const double DRANKCOST = 0.99;
+        const double HST = 0.13;
+
         double sub;
         double subTax;
         double tot;
@@ -33,9 +37,12 @@ namespace summativeCashRegister
         double ordBurgPrice;
         double ordFriePrice;
         double ordDrankPrice;
+
         Font receiptFont = new Font("Consolas", 11);
-        SolidBrush receiptBrush = new SolidBrush(Color.Black);
+        SolidBrush receiptBrush = new SolidBrush(Color.DimGray);
+        SolidBrush paperBrush = new SolidBrush(Color.White);
         
+        //startup
         public Form1()
         {
             InitializeComponent();
@@ -49,6 +56,7 @@ namespace summativeCashRegister
         {
             if (stageValue == 1)
             {
+                //setting component colours
                 calcTotals.BackColor = Color.WhiteSmoke;
                 calcTotals.ForeColor = Color.LightGray;
                 burgers.ForeColor = Color.LightGray;
@@ -63,9 +71,9 @@ namespace summativeCashRegister
                 printReciept.ForeColor = Color.LightGray;
                 printReciept.BackColor = Color.WhiteSmoke;
 
+                //button function
                 try
                 {
-
                     burger = Convert.ToInt16(burgerNum.Text);
                     drank = Convert.ToInt16(drinkNum.Text);
                     frie = Convert.ToInt16(friesNum.Text);
@@ -85,6 +93,7 @@ namespace summativeCashRegister
                     stageValue++;
                     notNum.Text = "";
                 }
+                //button failiure function
                 catch
                 {
                     notNum.Text = "Make Sure your menu items are \n Numbers";
@@ -103,16 +112,15 @@ namespace summativeCashRegister
                     printReciept.BackColor = Color.Gainsboro;
                 }
                 Refresh();
-                
             }
         }
 
         //stage 2 calculate change
         private void calcChange_Click(object sender, EventArgs e)
         {
-            
                 if (stageValue == 2)
                 {
+                //changing component colours
                     calcChange.BackColor = Color.WhiteSmoke;
                     calcChange.ForeColor = Color.LightGray;
                     subTotal.ForeColor = Color.LightGray;
@@ -127,19 +135,21 @@ namespace summativeCashRegister
                     printReciept.BackColor = Color.Gainsboro;
                     printReciept.ForeColor = Color.Black;
 
+                //button fuction
                     try
                     {
                         bill = Convert.ToDouble(moneyGiven.Text);
                         balance = bill - tot;
-                        changeNum.Text = balance.ToString("$0.00");
-                        
+                        changeNum.Text = balance.ToString("$0.00"); 
                     }
+
+                //button failiure function
                     catch
                     {
                         changeNum.Text = "that's not a valid change amount";
                     }
                 }
-
+            //make sure money tendered > cost
             if (bill >= tot)
             {
                 stageValue++;
@@ -168,6 +178,7 @@ namespace summativeCashRegister
         {
             if (stageValue == 3)
             {
+                //changing component colours
                 change.ForeColor = Color.LightGray;
                 changeNum.ForeColor = Color.LightGray;
                 printReciept.ForeColor = Color.LightGray;
@@ -176,58 +187,71 @@ namespace summativeCashRegister
                 printReciept.ForeColor = Color.LightGray;
                 Graphics reciept = this.CreateGraphics();
                 orderNum++;
+                
+                //declaring reciept string
                 string[] words = new string[] {
-                    //1
+                    //0
                     "    Mr.Burger's Burger Shack",
                     "         of Beef Burgers",
                     "         Order Number " ,
                     orderNum.ToString(),
 
-                    //5
+                    //4
                     "       Date October 23 2001",
                     "Hamburgers x",
                     burger.ToString(),
                     "   @2.49   =   " ,
                     ordBurgPrice.ToString("$0.00"),
 
-                    //10
+                    //9
                     "Fries      x",
                     frie.ToString(),
                     "   @1.89   =   " ,
                     ordFriePrice.ToString("$0.00"),
                     "Dranks     x",
 
-                    //15
+                    //14
                     drank.ToString() ,
                     "   @0.99   =   " ,
                     ordDrankPrice.ToString("$0.00"),
-                    "Subtotal   =   " ,
+                    "Subtotal                     =   " ,
                     sub.ToString("$0.00") ,
 
-                    //20
-                    "HST        =   " ,
+                    //19
+                    "HST                          =   " ,
                     subTax.ToString("$0.00") ,
-                    "Total      =   " ,
+                    "Total                        =   " ,
                     tot.ToString("$0.00") ,
-                    "Tenedered  =   " ,
+                    "Tenedered                    =   " ,
 
-                    //25
+                    //24
                     bill.ToString("$0.00") ,
-                    "Returned   =   " ,
+                    "Returned                     =   " ,
                     balance.ToString("$0.00")
                 };
-                for( int i = 0; i < words.Length; i++)
+
+                //printing reciept
+                reciept.FillRectangle(paperBrush, 230, 10, 350, 380 + 15);
+                SoundPlayer moneySound = new SoundPlayer(Properties.Resources.money);
+                moneySound.Play();
+                for ( int i = 0; i < words.Length; i++)
                 {
-                    
-                    if (i == 3||i == 6 ||i == 10 ||i == 14|| i == 18 || i == 20 || i == 22 || i == 24 || i == 26)
+                    if (i == 6 || i == 10 || i == 14)
                     {
                         drawWidth = drawWidth + 125;
                     }
-                    else if (i == 7||i == 11 ||i == 15)
+                    else if (i == 3){
+                        drawWidth = drawWidth + 180;
+                    }
+                    else if (i == 18 || i == 20 || i == 22 || i == 24 || i == 26)
+                    {
+                        drawWidth = drawWidth + 270;
+                    }
+                    else if (i == 7 || i == 11 || i == 15)
                     {
                         drawWidth = drawWidth + 25;
                     }
-                    else if (i == 8 || i == 12 ||i == 16)
+                    else if (i == 8 || i == 12 || i == 16)
                     {
                         drawWidth = drawWidth + 120;
                     }
@@ -236,26 +260,24 @@ namespace summativeCashRegister
                         drawHeight = drawHeight + 20;
                         drawWidth = 250;
                     }
+
+                    //double space printing
+                    if (i == 2 || i == 5|| i == 17 || i == 21)
+                    {
+                        drawHeight = drawHeight + 20;
+                    }
+
                     reciept.DrawString(words[i], receiptFont, receiptBrush, drawWidth, drawHeight);
-                    Thread.Sleep(50);
+                    Thread.Sleep(200);
                 }
-                /*reciept.DrawString("    Mr.Burger's Burger Shack \n         of Beef Burgers" + 
-                    "\n\n         Order Number " + orderNum +
-                    "\n       Date October 23 2001" +
-                    "\n\nHamburgers   x" + burger + "   @2.49     =   " + ordBurgPrice.ToString("$0.00") +
-                    "\nFries        x" + frie + "   @1.89     =   " + ordFriePrice.ToString("$0.00") +
-                    "\nDranks       x" + drank + "   @0.99     =   " + ordDrankPrice.ToString("$0.00") +
-                    "\n\nSubtotal   =   " + sub.ToString("$0.00") +
-                    "\nHST          =   " + subTax.ToString("$0.00") +
-                    "\nTotal        =   " + tot.ToString("$0.00") +
-                    "\n\nTenedered  =   " + bill.ToString("$0.00") +
-                    "\nReturned     =   " + balance.ToString("$0.00"), receiptFont, receiptBrush, 250, 20);*/
+                drawHeight = 20;
                 stageValue++;
             }
         }
-
+        
         private void newWorldOrder_Click(object sender, EventArgs e)
         {
+            //reseting all components
             stageValue = 1;
             calcTotals.BackColor = Color.Gainsboro;
             burgers.ForeColor = Color.Black;
